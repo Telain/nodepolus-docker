@@ -1,12 +1,10 @@
 FROM node
 
-RUN apt-get update
-RUN apt-get -y install git
+COPY ./startup.sh /usr/src/app/startup.sh
 
-WORKDIR /usr/src/app
-RUN git clone -n https://github.com/roobscoob/NodePolus.git
-WORKDIR /usr/src/app/NodePolus
-RUN npm install
+RUN apt-get update && apt-get -y install \
+  git \
+  && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /usr/src/app
 VOLUME /usr/src/app
